@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../services/theme_service.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final themeService = context.watch<ThemeService>();
+    
     return Scaffold(
       appBar: AppBar(
         title: const Text('Настройки'),
@@ -19,9 +23,9 @@ class SettingsScreen extends StatelessWidget {
                 icon: Icons.dark_mode,
                 title: 'Темная тема',
                 trailing: Switch(
-                  value: false,
+                  value: themeService.isDarkMode,
                   onChanged: (value) {
-                    // TODO: Implement theme switching
+                    themeService.toggleTheme();
                   },
                 ),
               ),
